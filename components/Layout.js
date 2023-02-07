@@ -9,9 +9,11 @@ import {
   useColorModeValue,
   useColorMode,
 } from "@chakra-ui/react";
+import { MoonIcon, SunIcon } from "@chakra-ui/icons";
+import Link from "next/link";
 
 const Layout = ({ children }) => {
-  const { toggleColorMode } = useColorMode();
+  const { colorMode, toggleColorMode } = useColorMode();
 
   return (
     <div>
@@ -29,16 +31,20 @@ const Layout = ({ children }) => {
           borderColor={useColorModeValue("gray.200", "gray.900")}
           align={"center"}>
           <Flex flex={{ base: 1 }} justify={{ base: "center", md: "start" }}>
-            <Text
+            <Link
+              href={"/"}
               fontFamily={"heading"}
               color={useColorModeValue("gray.800", "white")}>
               Logo
-            </Text>
+            </Link>
             <Stack
               flex={{ base: 1 }}
               justify={"flex-end"}
               direction={"row"}
               spacing={6}>
+              <Button onClick={toggleColorMode}>
+                {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
+              </Button>
               <Button
                 as={"a"}
                 fontSize={"sm"}
