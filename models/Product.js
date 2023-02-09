@@ -4,9 +4,9 @@ const productSchema = new mongoose.Schema(
   {
     id: { type: String, require: true, unique: true },
     title: { type: String, require: true },
-    image: { type: String, require: true },
     price: { type: Number, require: true },
     descr: { type: String, require: true },
+    img: { type: String, require: true },
   },
   {
     timestamps: true,
