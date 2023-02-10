@@ -32,8 +32,6 @@ export default function Home() {
     return <div>Loading...</div>;
   }
 
-  console.log(products);
-
   return (
     <>
       <main className={styles.main}>

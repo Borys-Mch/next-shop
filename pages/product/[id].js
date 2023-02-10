@@ -1,6 +1,4 @@
 import React from "react";
-import { useRouter } from "next/router";
-import { data } from "@/utils/data";
 import {
   Box,
   Button,
@@ -14,15 +12,16 @@ import {
   useColorModeValue,
 } from "@chakra-ui/react";
 
-const ProductPage = () => {
-  const router = useRouter();
-  const { id } = router.query;
+import db from "@/utils/db";
+import Product from "@/models/Product";
 
-  const product = data.products.find((product) => product.id === parseInt(id));
+const ProductPage = (props, tt) => {
+  const { product } = props;
 
   if (!product) {
     return <div>Product not found</div>;
   }
+
   return (
     <Container maxW={"container.xl"} mt={2}>
       <SimpleGrid columns={[1, 2]} spacing={2}>
@@ -68,5 +67,18 @@ const ProductPage = () => {
     </Container>
   );
 };
+
+export async function getServerSideProps(context) {
+  const { params } = context;
+  const { id } = params;
+
+  await db.connect();
+  const product = await Product.findOne({ id }).lean();
+  await db.disconnect();
+
+  return {
+    props: { product: db.convertDocToObj(product) },
+  };
+}
 
 export default ProductPage;
