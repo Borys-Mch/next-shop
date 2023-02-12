@@ -4,7 +4,7 @@ import { ChakraProvider } from "@chakra-ui/react";
 
 import Layout from "@/components/Layout";
 
-import { CartProvider } from "@/context/Cart";
+import { CartProvider } from "@/context/CartContext";
 
 export default function App({ Component, pageProps }) {
   return (

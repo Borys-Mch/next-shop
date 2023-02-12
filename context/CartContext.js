@@ -18,10 +18,10 @@ const cartReducer = (state, action) => {
   }
 };
 
-const CartContext = createContext;
+const CartContext = createContext();
 
 const CartProvider = ({ children }) => {
-  comst[(state, dispatch)] = useReducer(cartReducer, initialState);
+  const [state, dispatch] = useReducer(cartReducer, initialState);
 
   const addToCart = (item) => {
     dispatch({ type: "ADD_ITEM", payload: item });
