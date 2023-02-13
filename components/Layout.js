@@ -12,6 +12,7 @@ import {
 import { MoonIcon, SunIcon } from "@chakra-ui/icons";
 import Link from "next/link";
 
+import styles from "@/styles/Home.module.css";
 import CartIcon from "./CartIcon";
 
 const Layout = ({ children }) => {
@@ -47,7 +48,9 @@ const Layout = ({ children }) => {
               <Button onClick={toggleColorMode}>
                 {colorMode === "light" ? <MoonIcon /> : <SunIcon />}
               </Button>
-              <CartIcon />
+              <Link href="/cart" passHref>
+                <CartIcon />
+              </Link>
               <Button
                 as={"a"}
                 fontSize={"sm"}
@@ -68,7 +71,7 @@ const Layout = ({ children }) => {
           </Flex>
         </Flex>
       </Box>
-      {children}
+      <main className={styles.main}>{children}</main>
       <Box>
         <Flex
           bg={useColorModeValue("white", "gray.600")}
