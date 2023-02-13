@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 import {
   Box,
   Button,
@@ -14,8 +14,11 @@ import {
 
 import db from "@/utils/db";
 import Product from "@/models/Product";
+import { CartContext } from "@/context/CartContext";
 
 const ProductPage = (props, tt) => {
+  const { addToCart } = useContext(CartContext);
+
   const { product } = props;
 
   if (!product) {
@@ -58,7 +61,8 @@ const ProductPage = (props, tt) => {
               py={7}
               bg={useColorModeValue("gray.900", "gray.50")}
               color={useColorModeValue("white", "gray.900")}
-              textTransform={"uppercase"}>
+              textTransform={"uppercase"}
+              onClick={() => addToCart(product)}>
               Add to cart
             </Button>
           </Flex>

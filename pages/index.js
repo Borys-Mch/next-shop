@@ -1,3 +1,4 @@
+import styles from "@/styles/Home.module.css";
 import Products from "@/components/Products";
 import { useState, useEffect } from "react";
 
@@ -33,7 +34,9 @@ export default function Home() {
 
   return (
     <>
-      <Products data={products} />
+      <main className={styles.main}>
+        <Products data={products} />
+      </main>
     </>
   );
 }

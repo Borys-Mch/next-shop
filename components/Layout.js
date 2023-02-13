@@ -71,7 +71,7 @@ const Layout = ({ children }) => {
           </Flex>
         </Flex>
       </Box>
-      <main className={styles.main}>{children}</main>
+      <main className={styles.heightPage}>{children}</main>
       <Box>
         <Flex
           bg={useColorModeValue("white", "gray.600")}
