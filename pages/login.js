@@ -3,6 +3,7 @@ import {
   Button,
   Container,
   FormControl,
+  FormHelperText,
   FormLabel,
   Heading,
   HStack,
@@ -14,6 +15,15 @@ import {
 } from "@chakra-ui/react";
 import Link from "next/link";
 import React, { useState } from "react";
+import * as yup from "yup";
+
+const loginSchema = yup.object({
+  email: yup.string().email("Invalid email").required("Email is required"),
+  password: yup
+    .string()
+    .min(8, "Password must be at least 8 characters")
+    .required("Password is required"),
+});
 
 const LoginPage = () => {
   const [email, setEmail] = useState("");
@@ -21,8 +31,29 @@ const LoginPage = () => {
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
+
+    try {
+      await loginSchema.validate(
+        {
+          email,
+          password,
+        },
+        {
+          abortEarly: false,
+        }
+      );
+    } catch (err) {
+      const validationErrors = {};
+      if (err instanceof yup.ValidationError) {
+        err.inner.forEach(({ path, message }) => {
+          validationErrors[path] = message;
+        });
+      }
+      setError(validationErrors);
+      return;
+    }
 
     setEmail("");
     setPassword("");
@@ -62,6 +93,11 @@ const LoginPage = () => {
                   type="email"
                   onChange={(e) => setEmail(e.target.value)}
                 />
+                <FormHelperText
+                  color={useColorModeValue("red.700", "red.300")}
+                  id="email-helper-text">
+                  {error.email}
+                </FormHelperText>
               </FormControl>
               <FormControl>
                 <FormLabel htmlFor="password">Password</FormLabel>
@@ -70,6 +106,11 @@ const LoginPage = () => {
                   type="password"
                   onChange={(e) => setPassword(e.target.value)}
                 />
+                <FormHelperText
+                  color={useColorModeValue("red.700", "red.300")}
+                  id="password-helper-text">
+                  {error.password}
+                </FormHelperText>
               </FormControl>
             </Stack>
             <HStack justify="space-between">

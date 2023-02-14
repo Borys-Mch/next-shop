@@ -62,8 +62,7 @@ const Layout = ({ children }) => {
                 fontSize={"sm"}
                 fontWeight={600}
                 colorScheme={"teal"}
-                href={"#"}
-                _hover={{ bg: "teal.500" }}>
+                href={"#"}>
                 Sign Up
               </Button>
             </Stack>
