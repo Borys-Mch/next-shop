@@ -61,8 +61,7 @@ const Layout = ({ children }) => {
               <Button
                 fontSize={"sm"}
                 fontWeight={600}
-                color={"white"}
-                bg={"teal.400"}
+                colorScheme={"teal"}
                 href={"#"}
                 _hover={{ bg: "teal.500" }}>
                 Sign Up

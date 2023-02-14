@@ -15,7 +15,8 @@ import {
 import Link from "next/link";
 import React, { useState } from "react";
 
-const LoginPage = () => {
+const SignupPage = () => {
+  const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
@@ -35,12 +36,12 @@ const LoginPage = () => {
       px={{ base: "0", sm: "8" }}>
       <Stack spacing="8">
         <Stack spacing="6" textAlign="center">
-          <Heading>Log in to your account</Heading>
+          <Heading>Create an account</Heading>
           <HStack spacing="2" justify="center">
-            <Text>Dont&apos;t have an account?</Text>
-            <Link href="/signup" passHref>
+            <Text>Already have an account?</Text>
+            <Link href="/login" passHref>
               <Button variant="link" colorScheme="facebook">
-                Sing up
+                Sing in
               </Button>
             </Link>
           </HStack>
@@ -55,6 +56,14 @@ const LoginPage = () => {
         <form onSubmit={handleSubmit}>
           <Stack spacing="6">
             <Stack spacing="5">
+              <FormControl>
+                <FormLabel htmlFor="name">Full name</FormLabel>
+                <Input
+                  id="name"
+                  type="text"
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </FormControl>
               <FormControl>
                 <FormLabel htmlFor="email">Email address</FormLabel>
                 <Input
@@ -72,14 +81,9 @@ const LoginPage = () => {
                 />
               </FormControl>
             </Stack>
-            <HStack justify="space-between">
-              <Button variant="link" colorScheme="facebook" size="sm">
-                Forgot Password?
-              </Button>
-            </HStack>
             <Stack>
               <Button colorScheme="teal" type="submit">
-                Sign In
+                Sign Up
               </Button>
             </Stack>
           </Stack>
@@ -89,4 +93,4 @@ const LoginPage = () => {
   );
 };
 
-export default LoginPage;
+export default SignupPage;
